@@ -1,13 +1,19 @@
-# I support Markdown
+# Listing and Changing Shells
 
-This is **bold** and *emphasised*
+You can **list** installed shells with...
 
-* Test 1
-* Test 2
-
-## Code Sample
-
-```js
-const bla = "This is code";
-console.log( bla );
 ```
+cat /etc/shells
+```
+
+You can **change** your shell with...
+
+```
+chsh -s /bin/zsh
+```
+
+<!--
+echo {1..8} | xargs -n 1 echo
+
+https://explainshell.com/explain?cmd=echo+%7B1..8%7D+%7C+xargs+-n+1+echo
+-->

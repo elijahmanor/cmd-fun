@@ -4,4 +4,5 @@ require('@babel/register')({
     ["@babel/preset-react"]
   ]
 });
+require("@babel/polyfill");
 require('./App.js');

@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react'
-import blessed from 'neo-blessed'
+import React, { useState, useEffect } from 'react'
 import figlet from 'figlet'
 
+// const FONTS = figlet.fontsSync()
 const FONTS = [
     'ANSI Shadow',
     '3-D',
@@ -23,10 +23,8 @@ const FONTS = [
     'Nancyj',
     'Slant',
 ]
-// const FONTS = figlet.fontsSync()
-
+const H2_FONTS = ['Calvin S', 'Cybermedium', 'Stick Letters', 'Small']
 let timerId
-const fs = require('fs')
 
 const centerFiglet = (text, width) => {
     const lines = text.split('\n')
@@ -40,36 +38,34 @@ const centerFiglet = (text, width) => {
         .join('\n')
 }
 
-export default function Introduction({ screen, onFontChange }) {
+export default function Conclusion({ screen }) {
     const [fontIndex, setFontIndex] = useState(0)
     const [showFont, setShowFont] = useState(false)
-
     useEffect(() => {
-        function handleKey(ch, key) {
-            const font = (fontIndex + 1) % (FONTS.length - 1)
-            setFontIndex(font)
+        function handleKey() {
             setShowFont(true)
             clearTimeout(timerId)
             timerId = setTimeout(() => {
                 setShowFont(false)
             }, 5000)
-            onFontChange(font)
+            setFontIndex((fontIndex + 1) % (FONTS.length - 1))
         }
         screen.key(['C-f'], handleKey)
         return () => screen.unkey(['C-f'], handleKey)
     }, [fontIndex])
     const font = FONTS[fontIndex]
+    // border={{ type: 'line' }}
     return (
         <>
             <box
-                top={`5%`}
+                top="30%"
                 left="center"
-                width="100%-2"
                 align="center"
+                width="100%-2"
                 height={7}
             >
                 {centerFiglet(
-                    figlet.textSync('Have Fun & Be', {
+                    figlet.textSync('Thank You!', {
                         font,
                         horizontalLayout: 'default',
                         verticalLayout: 'default',
@@ -78,25 +74,15 @@ export default function Introduction({ screen, onFontChange }) {
                 )}
             </box>
             <box
-                top={`35%`}
+                top="50%"
                 left="center"
                 align="center"
                 width="100%-2"
                 height={7}
             >
                 {centerFiglet(
-                    figlet.textSync('Productive in', {
-                        font,
-                        horizontalLayout: 'default',
-                        verticalLayout: 'default',
-                    }),
-                    screen.width
-                )}
-            </box>
-            <box top={`65%`} left="center" width="100%-2" height={7}>
-                {centerFiglet(
-                    figlet.textSync('the Terminal', {
-                        font,
+                    figlet.textSync('@elijahmanor', {
+                        font: H2_FONTS[0],
                         horizontalLayout: 'default',
                         verticalLayout: 'default',
                     }),

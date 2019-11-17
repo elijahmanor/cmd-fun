@@ -1,0 +1,372 @@
+# Shell Tips & Tricks
+
+---
+
+## Quickly switch to previous git branch
+
+<Appear top={5}>
+    <Highlight
+        top={0}
+        left={4}
+        pwd="~/myrepo"
+        git="feature-cool-stuff"
+        command={`git commit -am "Amazing thing"`}
+    />
+    <Highlight
+        top={2}
+        left={4}
+        pwd="~/myrepo"
+        git="feature-cool-stuff"
+        command="git checkout master"
+    />
+    <Highlight
+        top={4}
+        left={4}
+        pwd="~/myrepo"
+        git="master"
+        command="# How do I get back to previous branch quickly!?!"
+    />
+    <Highlight
+        top={6}
+        left={4}
+        pwd="~/myrepo"
+        git="master"
+        command="git checkout -"
+    />
+    <Highlight top={8} left={4} pwd="~/myrepo" git="feature-cool-stuff" />
+</Appear>
+
+---
+
+## Quickly cd to a newly created directory
+
+<Appear top={5}>
+    <Highlight
+        top={0}
+        left={4}
+        pwd="~/some/really/deeply/nested/place"
+        command="cd ~/myrepo"
+    />
+    <Highlight top={2} left={4} pwd="~/myrepo" command="npm install" />
+    <Highlight
+        top={4}
+        left={4}
+        pwd="~/myrepo"
+        command="# How do I get back to previous directory quickly!?!"
+    />
+    <Highlight top={6} left={4} pwd="~/myrepo" command="cd -" />
+    <Highlight top={8} left={4} pwd="~/some/really/deeply/nested/place" />
+</Appear>
+
+---
+
+## Use Unix brace expansion: Basics
+
+<Appear top={5}>
+    <Highlight top={0} left={4} command="echo {1..8}" />
+    <Highlight top={2} left={4} command="echo 1 2 3 4 5 6 7 8" />
+    <Highlight top={4} left={4} command="echo {one,three,five}" />
+    <Highlight top={6} left={4} command="echo one three five" />
+    <Highlight top={8} left={4} command="echo {a..c}{a..z}" />
+    <Highlight top={10} left={4} command="echo aa ab ac ba bb bc ca cb cc" />
+</Appear>
+
+---
+
+## Use Unix brace expansion: Practical
+
+<Appear top={5}>
+    <Highlight top={0} left={4} command="touch index.{html,css,js}" />
+    <Highlight top={2} left={4} command="touch index.html index.css index.js" />
+    <Highlight
+        top={4}
+        left={4}
+        command="npm install eslint{,-config-react-app} eslint-plugin-{react,react-hooks}"
+    />
+    <Highlight
+        top={6}
+        left={4}
+        command="npm install eslint eslint-config-react-app eslint-plugin-react eslint-plugin-react-hooks"
+    />
+    <Highlight top={8} left={4} command="touch file{1..5}.txt" />
+    <Highlight
+        top={10}
+        left={4}
+        command="touch file1.txt file2.txt file3.txt file4.txt file5.txt"
+    />
+</Appear>
+
+---
+
+## Switch to z-shell using Oh-My-Zsh
+
+<text top={5} left={0}>
+    Oh My ZSH! ( https://ohmyz.sh/ ) - Drop-in replacement for Bash
+</text>
+<text top={7} left={0}>
+    macOS Catalina now defaults to zsh instead of bash, but oh-my-zsh is still
+    recommended
+</text>
+<Highlight
+    top={9}
+    left={4}
+    command='sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
+/>
+<CopyButton
+    top={11}
+    left={0}
+    textToCopy='sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
+/>
+
+---
+
+## Bash Tab Completion
+
+<Appear top={5}>
+    <Highlight top={0} left={4} command="cat test<tab>" />
+    <Highlight top={2} left={4} command="cat test-file.txt" />
+    <Highlight top={4} left={4} command="cd <tab>" />
+    <Box top={6} left={4}>
+        {`.docker/                .git/                   README.md                 package.json
+.dockerignore           .github/                client/                   public/
+.drone.yml              .gitignore              configs/                  server/
+.editorConfig           .nvmrc                  coverage/                 tools/
+.eslintcache            .nyc_output/            docs/                     webpack.config.js     
+.eslintignore           CHANGELOG.md            node_modules/             webpack.dev.config.js
+.eslintrc.js            Dockerfile              package-lock.json         webpack.test.config.js
+`}
+    </Box>
+</Appear>
+
+---
+
+## Oh-My-Zsh Tab Completion
+
+<Appear top={5}>
+    <Highlight top={0} left={4} command="cd <tab>" />
+    <TabCompletion
+        top={8}
+        left={4}
+        items={[
+            '.docker/',
+            '.dockerignore',
+            '.drone.yml',
+            '.editorConfig',
+            '.eslintcache',
+            '.eslintignore',
+            '.eslintrc.js',
+            '.git/',
+            '.github/',
+            '.gitignore',
+            '.nvmrc',
+            'CHANGELOG.md',
+            'Dockerfile',
+            'README.md',
+            'client/',
+            'configs/',
+            'converage/',
+            'docs/',
+            'node_modules/',
+            'package-lock.json',
+            'package.json',
+            'public/',
+            'server/',
+            'tools/',
+            'webpack.config.js',
+            'webpack.dev.config.js',
+            'webpack.test.config.js',
+        ]}
+        steps={[0, 1, 2, 3, 10, 17]}
+    />
+    <Highlight top={2} left={4} command="git checkout feature<tab>" />
+    <TabCompletion top={8} left={4} items={[]} steps={[]} />
+    <Highlight top={4} left={4} command="git merge -- <tab>" />
+    <TabCompletion
+        top={}
+        left={}
+        items={[
+            '--',
+            '--abort',
+            '--commit',
+            '--continue',
+            '--ff',
+            '--ff-only',
+            '--no-ff',
+            '--no-squash',
+            '--quiet',
+            '--squash',
+            '--verbose',
+            '--verify',
+            '--no-verify',
+        ]}
+        steps={[]}
+    />
+    <Highlight top={6} left={4} command="git add <tab>" />
+    <Highlight top={6} left={4} command="git add <tab>" />
+</Appear>
+
+---
+
+## Bash Histtory
+
+```
+history
+history | awk '{print $2}' | sort | uniq -c | sort -rn | head -5
+[up-arrow]
+Control-R - Start typing, Control-R for other matches
+```
+
+---
+
+## Oh-My-Zsh History
+
+```
+npm i[up-arrow]
+```
+
+---
+
+## Oh-My-Zsh Spelling Correction
+
+In ~.zshrc change `ENABLE_CORRECTION="true"`
+
+```
+$ ~ > mr secrets.txt
+zsh: correct 'mr' to 'rm' [nyae]?
+```
+
+---
+
+## Bash Changing Dirs
+
+The way you might switch to another project...
+
+```
+$ ~/project-1 > cd ../project-2
+$ ~/project-2 >
+```
+
+---
+
+## Oh-My-Zsh Changing Dirs
+
+With zsh `AUTO_CD` makes it so you don't have to use `cd`
+
+```
+$ ~/project-1 > ../project-2
+$ ~/project-2 >
+```
+
+With zsh use `cd` to replace 2nd argument with 1st occurence of 1st argument in current path
+
+```
+$ ~/project-1 > cd -1 -2
+$ ~/project-2 >
+```
+
+---
+
+## Oh-My-Zsh Path Expansion
+
+```
+path expansion - cd /u/to/b
+```
+
+---
+
+## Switch themes in Oh-My-Zsh
+
+You can change your theme by updating `ZSH_THEME` in `~/.zshrc`, then sourcing the zshrc
+
+[Theme Screenshots](https://github.com/robbyrussell/oh-my-zsh/wiki/Themes)
+
+```
+ZSH_THEME="bureau"
+```
+
+If you like to live dangerously, you can set a random theme for each instance!
+
+```
+ZSH_THEME="random"
+ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" "avit" "bira" "bureau" "gnzh" "nanotech" "sorin" )
+```
+
+---
+
+## Switch plugins in Oh-My-Zsh
+
+zsh-history-substring-search
+zsh-syntax-highlighting
+
+```
+plugins=(git npm z node brew zsh-autosuggestions)
+```
+
+---
+
+## Get rid of that last login message
+
+<Highlight top={5} left={0} highlight={false} code="touch ~/.hushlogin" />
+<CopyButton top={7} left={0} textToCopy="touch ~/.hushlogin" />
+
+---
+
+## String together comamnds
+
+<text top={5}>test</text>
+
+---
+
+## Add aliases for long Terminal commands
+
+---
+
+## Quickly navigate to frequent folders
+
+`z`
+
+---
+
+## Provide feedback to long running cmds
+
+<text top={5}>visual and auditory</text>
+
+---
+
+## View your local weather on the terminal
+
+<Highlight top={5} left={0} highlight={false} code="curl wttr.in" />
+<CopyButton top={7} left={0} textToCopy="curl wttr.in" />
+<RunButton top={7} left={12} textToRun="curl wttr.in" />
+<text top={11}>https://github.com/chubin/wttr.in</text>
+
+---
+
+## Add npm version to oh-my-zsh theme
+
+---
+
+## Install helpful tools with homebrew
+
+<text top={5}>`homebrew` - the missing package manager for macOS</text>
+
+---
+
+## Kick up a quick web server: Part One
+
+<Highlight
+    top={5}
+    left={0}
+    highlight={false}
+    code="python -m SimpleHTTPServer 8000"
+/>
+<CopyButton top={7} left={0} textToCopy="python -m SimpleHTTPServer 8000" />
+<RunButton top={7} left={12} textToRun="python -m SimpleHTTPServer 8000" />
+
+---
+
+## Kick up a quick web server: Part Two
+
+<Highlight top={5} left={0} highlight={false} code="npx serve" />
+<CopyButton top={7} left={0} textToCopy="npx serve" />
+<RunButton top={7} left={12} textToRun="npx serve" />
