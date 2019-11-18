@@ -8,7 +8,7 @@
         "deploy": "npx np"
     },
     "bin": {
-        "cmd-fun": "babel-node index.js"
+        "cmd-fun": "babel-node ./index.js"
     },
     "keywords": [],
     "author": "",
