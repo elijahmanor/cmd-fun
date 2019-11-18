@@ -4,7 +4,8 @@
     "description": "Having Fun on the Command Line!",
     "main": "index.js",
     "scripts": {
-        "start": "node index.js"
+        "start": "node index.js",
+        "deploy": "npx np"
     },
     "bin": {
         "cmd-fun": "index.js"
