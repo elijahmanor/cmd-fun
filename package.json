@@ -1,6 +1,6 @@
 {
     "name": "cmd-fun",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Having Fun on the Command Line!",
     "main": "index.js",
     "scripts": {
