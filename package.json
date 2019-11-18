@@ -1,10 +1,13 @@
 {
-    "name": "t-mdx-deck",
+    "name": "cmd-fun",
     "version": "1.0.0",
-    "description": "",
+    "description": "Having Fun on the Command Line!",
     "main": "index.js",
     "scripts": {
         "start": "node index.js"
+    },
+    "bin": {
+        "cmd-fun": "index.js"
     },
     "keywords": [],
     "author": "",
