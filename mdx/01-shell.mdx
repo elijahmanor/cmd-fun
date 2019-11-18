@@ -126,31 +126,10 @@
     <Highlight top={0} left={4} command="cat test<tab>" />
     <Highlight top={2} left={4} command="cat test-file.txt" />
     <Highlight top={4} left={4} command="cd <tab>" />
-    <Box top={6} left={4}>
-        {`.docker/                .git/                   README.md                 package.json
-.dockerignore           .github/                client/                   public/
-.drone.yml              .gitignore              configs/                  server/
-.editorConfig           .nvmrc                  coverage/                 tools/
-.eslintcache            .nyc_output/            docs/                     webpack.config.js     
-.eslintignore           CHANGELOG.md            node_modules/             webpack.dev.config.js
-.eslintrc.js            Dockerfile              package-lock.json         webpack.test.config.js
-`}
-    </Box>
-</Appear>
-
----
-
-## Oh-My-Zsh Tab Completion
-
-<Appear top={5}>
-    <Highlight top={0} left={4} command="cd <tab>" />
     <TabCompletion
-        top={8}
+        top={5}
         left={4}
         items={[
-            '.docker/',
-            '.dockerignore',
-            '.drone.yml',
             '.editorConfig',
             '.eslintcache',
             '.eslintignore',
@@ -160,30 +139,69 @@
             '.gitignore',
             '.nvmrc',
             'CHANGELOG.md',
-            'Dockerfile',
             'README.md',
             'client/',
-            'configs/',
-            'converage/',
-            'docs/',
             'node_modules/',
             'package-lock.json',
             'package.json',
             'public/',
-            'server/',
-            'tools/',
             'webpack.config.js',
             'webpack.dev.config.js',
             'webpack.test.config.js',
         ]}
-        steps={[0, 1, 2, 3, 10, 17]}
     />
-    <Highlight top={2} left={4} command="git checkout feature<tab>" />
-    <TabCompletion top={8} left={4} items={[]} steps={[]} />
-    <Highlight top={4} left={4} command="git merge -- <tab>" />
+</Appear>
+
+---
+
+## Oh-My-Zsh Tab Completion
+
+<Appear top={5}>
+    <Highlight top={0} left={4} command="cd <tab>" />
     <TabCompletion
-        top={}
-        left={}
+        top={1}
+        left={4}
+        items={[
+            '.editorConfig',
+            '.eslintcache',
+            '.eslintignore',
+            '.eslintrc.js',
+            '.git/',
+            '.github/',
+            '.gitignore',
+            '.nvmrc',
+            'CHANGELOG.md',
+            'README.md',
+            'client/',
+            'node_modules/',
+            'package-lock.json',
+            'package.json',
+            'public/',
+            'webpack.config.js',
+            'webpack.dev.config.js',
+            'webpack.test.config.js',
+        ]}
+        steps={[0, 1, 2, 3, 8, 13]}
+    />
+    <Highlight top={7} left={4} command="git checkout feature-<tab>" />
+    <TabCompletion
+        top={8}
+        left={4}
+        items={[
+            'feature-cool-thing1',
+            'feature-cool-thing2',
+            'feature-i-forget',
+            'feature-rewrite-everything',
+            'feature-super-secret',
+            'feature-what-was-i-doing',
+            'feature-yes-do-this-now',
+        ]}
+        steps={[0, 1, 3, 5]}
+    />
+    <Highlight top={11} left={4} command="git merge -- <tab>" />
+    <TabCompletion
+        top={12}
+        left={4}
         items={[
             '--',
             '--abort',
@@ -199,15 +217,19 @@
             '--verify',
             '--no-verify',
         ]}
-        steps={[]}
+        steps={[0, 1]}
     />
-    <Highlight top={6} left={4} command="git add <tab>" />
-    <Highlight top={6} left={4} command="git add <tab>" />
+    <Highlight top={17} left={4} command="git add <tab>" />
+    <Highlight
+        top={18}
+        left={4}
+        command="git add smart-enough-to-know-what-is-not-staged.js"
+    />
 </Appear>
 
 ---
 
-## Bash Histtory
+## Bash History
 
 ```
 history

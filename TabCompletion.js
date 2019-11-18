@@ -32,7 +32,7 @@ export default function TabCompletion({
                 const { x, y } = getXY(i, items, columns)
                 return (
                     <text left={x * widthOffset} top={y * 1} key={item}>
-                        {i === itemIndex
+                        {steps.length && i === itemIndex
                             ? chalk.bgWhite.black(item)
                             : item.endsWith('/')
                             ? chalk.red(item)
