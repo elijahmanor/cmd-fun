@@ -2,13 +2,13 @@
     "name": "cmd-fun",
     "version": "1.0.4",
     "description": "Having Fun on the Command Line!",
-    "main": "index.js",
+    "main": "./index.js",
     "scripts": {
-        "start": "node index.js",
+        "start": "node ./index.js",
         "deploy": "npx np"
     },
     "bin": {
-        "cmd-fun": "babel-node ./index.js"
+        "cmd-fun": "./index.js"
     },
     "keywords": [],
     "author": "",
