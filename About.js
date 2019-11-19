@@ -68,7 +68,7 @@ https://${chalk.blue('linkedin')}.com/${chalk.yellow('elijahmanor')}
     const about = `${name}\n\n${bio}\n\n${links}`
     return (
         <>
-            <box height={'40%'} width={'100%-15'} top={`20%`} left={'0%+4'}>
+            <box height={'30%'} width={'100%-15'} top={`15%`} left={'0%+4'}>
                 {about}
             </box>
         </>
