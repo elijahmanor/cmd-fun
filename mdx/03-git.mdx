@@ -1,43 +1,129 @@
 # Git Tips and Tricks
 
+<!--
+
+## Add one about git prx
+
+## Clean up completed git branches
+
+```
+alias git-clean-branches="git branch --merged master | grep -v -e 'master' -e '\*' | xargs -n 1 git branch -d && git remote prune origin"
+alias prune-local="git branch --merged master | grep -v master$ | xargs git branch -d"
+hub sync
+```
+
+-->
+
+---
+
+## Predefined Oh-My-Zsh git Aliases
+
+```
+alias | grep -i git | sort -R | head -10
+```
+
+```
+ggpull='git pull origin "$(git_current_branch)"'
+gke='\gitk --all $(git log -g --pretty=%h)'
+gfa='git fetch --all --prune'
+gcs='git commit -S'
+gsta='git stash push'
+gbs='git bisect'
+groh='git reset origin/$(git_current_branch) --hard'
+gds='git diff --staged'
+grbd='git rebase develop'
+gupv='git pull --rebase -v'
+```
+
 ---
 
 ## Add a set of helpful commands to git
 
-<text top={5}>
-    [hub](https://twitter.com/elijahmanor/status/747499860123914240)
-</text>
+-   [hub](https://hub.github.com/)
+-   [man hub](https://hub.github.com/hub.1.html)
+
+```
+hub sync
+hub browse
+hub pr list
+hub browse
+hub pr checkout 134
+...etc...
+```
+
+Install `brew install hub` and create a `git` alias
+
+```
+eval "\$(hub alias -s)"
+```
 
 ---
 
 ## List your most recent local git branches
 
-<text top={5}>custom git alias</text>
+Install the following `git` alias to show your recent branches
 
----
+```
+git config --global alias.recent-branches '!git for-each-ref --sort=-committerdate --count=10 --format="%(refname:short)" refs/heads/'
+cat ~/.gitconfig
+```
 
-## Clean up completed git branches
+Then you can use the alias like the following...
 
-local & remote
-
-<text top={5}>custom git alias</text>
-<text top={7}>hub command</text>
+```
+git recent-branches
+master
+feature-used-to-work-on
+defect-oops-forgot-about-this
+```
 
 ---
 
 ## Automatically run npm tasks on git hooks
 
-<text top={5}>Husky</text>
+Locally install `husky` in your project.
+
+```
+npm install husky --save-dev
+```
+
+Husky supports all Git hooks found in the [git documentation](https://git-scm.com/docs/githooks)
+
+```
+{
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test",
+      "pre-push": "npm run lint",
+      "...": "..."
+    }
+  }
+}
+```
 
 ---
 
 ## Make your git diffs look great
 
-<text top={5}>npm install -g diff-so-fancy</text>
-<text top={7}>https://github.com/so-fancy/diff-so-fancy</text>
+[Good-lookin' diffs](https://github.com/so-fancy/diff-so-fancy)
+
+```
+npm install -g diff-so-fancy
+```
 
 ---
 
 ## Visually interact with git via Terminal
 
-<text top={5}>https://jonas.github.io/tig/</text>
+-   [tig](https://github.com/jonas/tig) - Text-mode interface for git
+
+```
+brew install tig
+```
+
+-   [lazygit](https://github.com/jesseduffield/lazygit) - A simple terminal UI for git commands
+
+```
+brew install jesseduffield/lazygit/lazygit
+brew install lazygit
+```

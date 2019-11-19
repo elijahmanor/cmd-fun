@@ -1,120 +1,167 @@
 # Command Line Tools
 
----
-
-## Add a set of helpful commands to git
-
-<text top={5}>
-    [hub](https://twitter.com/elijahmanor/status/747499860123914240)
-</text>
+<!--
+* https://github.com/lirantal/dockly
+* brew install wifi-password
+* npm install -g http-server
+* npm install -g ntl
+* npm install -g fkill-cli
+* https://wtfutil.com/
+* tiny-care-terminal
+* npm cache clean --force # clans up npm
+* yarn cache dir # shows where cache is stored
+* yarn cache list # lists everything in cache
+* yarn cache clean # cleans the cache
+* brew uninstall yarn # uninstall yarn
+* brew cleanup -n # shows what would cleanup
+* brew cleanup # cleans up brew
+* TODO: Need command here # cleans up docker
+* https://github.com/tslide/tslide
+* [howdoi](https://github.com/gleitz/howdoi) - Instant coding answers via the command line
+* brew install howdoi
+-->
 
 ---
 
 ## Visually see folder structure
 
-<text top={5}>brew install tree</text>
+```
+brew install tree
+```
 
----
+```
+tree -L 2 -I node_modules
+```
 
-## View a graphical activity monitor: vtop
+```
+.
+├── README.md
+├── package.json
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   └── manifest.json
+├── src
+│   ├── App.css
+│   ├── App.js
+│   ├── App.test.js
+│   ├── index.css
+│   └── index.js
+└── yarn.lock
 
-<text top={5}>
-    `vtop` - Wow such top. So stats. More better than regular top
-</text>
-<text top={7}>http://parall.ax/vtop</text>
-<text top={9}>https://github.com/MrRio/vtop</text>
-
----
-
-## View a graphical activity monitor: htop
-
-<text top={5}>`htop` - An interactive process viewer for Unix systems</text>
-<text top={7}>http://hisham.hm/htop/</text>
-
----
-
-## Test your internet speed from Terminal
-
-<text top={5}>
-    `speed-test` - Test your internet connection speed and ping using
-    speedtest.net from the CLI
-</text>
-<text top={7}>https://www.npmjs.com/package/speed-test</text>
-
----
-
-## Use a better cat
-
-<text top={5}>bat</text>
-
----
-
-## Visually check your disk usage
-
-<text top={5}></text>
-
----
-
-## Manage git from the Terminal with
-
-<text top={5}>lazygit</text>
-
----
-
-## Quickly navigate folders on the Terminal
-
-<text top={5}>https://ranger.github.io/</text>
-
----
-
-## Visually manage docker containers
-
-<text top={5}>
-    Immersive terminal interface for managing docker containers and services
-</text>
-<text top={7}>https://github.com/lirantal/dockly</text>
+2 directories, 11 files
+```
 
 ---
 
 ## Safely delete files from the terminal
 
-<text top={5}>brew install trash</text>
+Move files to macOS trash instead of perminantly deleting with `rm`
+
+```
+brew install trash
+trash safely-delete-file.js
+```
+
+---
+
+## View your local weather on the terminal
+
+<Appear top={5}>
+    <>
+        <text top={0} left={0}>{`[wttr.in](https://github.com/chubin/wttr.in) is a console-oriented weather forecast service`}</text>
+        <Highlight top={2} left={4} command="curl wttr.in" />
+        <CopyButton top={4} left={4} textToCopy="curl wttr.in" />
+        <RunButton top={4} left={16} textToRun="curl wttr.in" />
+    </>
+    <>
+        <text top={8} left={0}>{`You also may consider making an alias or use a wrapper on npm`}</text>
+        <text top={10} left={4}>{`alias weather="curl -4 wttr.in/nashville"`}</text>
+        <Highlight top={12} left={4} highlight={false} command="npx wttr" />            
+    </>
+</Appear>
+---
+
+## View a graphical activity monitor
+
+-   [vtop](http://parall.ax/vtop) - Wow such top. So stats. More better than regular top
+
+```
+brew install vtop
+```
+
+-   [htop](http://hisham.hm/htop/) - An interactive process viewer for Unix systems
+
+```
+brew install htop
+```
+
+---
+
+## Test your internet speed from Terminal
+
+-   [speed-test](https://github.com/sindresorhus/speed-test)
+-   Test your internet connection speed and ping using speedtest.net from the CLI
+
+```
+npx speed-test
+```
+
+---
+
+## Use a better cat
+
+-   [bat](https://github.com/sharkdp/bat) - A cat(1) clone with wings
+
+
+```
+brew install bat
+```
+
+* Syntax highlighting
+* Git integration
+* Show non-printable characters
+* Automatic paging
+
+---
+
+## Visually check your disk usage
+
+* [ncdu](https://dev.yorhel.nl/ncdu) - CLI disk usage analyzer
+
+```
+brew install ncdu
+```
+
+---
+
+## Quickly navigate folders on the Terminal
+
+* [ranger](https://ranger.github.io/) - ranger is a console file manager with VI key bindings.
+
+```
+brew install ranger
+```
 
 ---
 
 ## View Simple Community-Driven man pages
 
-<text top={5}>https://tldr.sh/</text>
-<text top={7}>http://npm.im/tldr</text>
+- [tldr](https://tldr.sh/) - The TLDR pages are a community effort to simplify the beloved man pages with practical examples.
 
----
-
-## View password for current WiFi network
-
-<text top={5}>brew install wifi-password</text>
-
----
-
-## Get instant Coding Answers via terminal
-
-<text top={5}>https://github.com/gleitz/howdoi</text>
-<text top={7}>brew install howdoi</text>
-
----
-
-## Create a Terminal Dashboard
-
-<text top={5}>https://wtfutil.com/</text>
-<text top={7}>tiny-care-terminal</text>
-
----
-
-## Use the Terminal for a Slide Presentation
-
-<text top={5}>https://github.com/tslide/tslide</text>
+```
+npx tldr mkdir
+```
 
 ---
 
 ## Interactively kill processes
 
-<text top={5}>npx fkill-cli</text>
+- [fkill-cli](https://github.com/sindresorhus/fkill-cli) - Fabulously kill processes. Cross-platform. 
+
+```
+npx fkill-cli
+npx fkill 1337
+npx fkill safari
+npx fkill :8080
+```

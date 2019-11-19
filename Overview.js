@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import figlet from 'figlet'
 import { numericLiteral } from '@babel/types'
+import { centerFiglet } from './utils'
 
 // const FONTS = figlet.fontsSync()
 const FONTS = [
@@ -37,17 +38,6 @@ const H2_FONTS = [
 ]
 let timerId
 
-const centerFiglet = (text, width) => {
-    const lines = text.split('\n')
-    const longestLine = lines.reduce((memo, line) => {
-        memo = line.length > memo ? line.length : memo
-        return memo
-    }, 0)
-    const surroundingPadding = width - longestLine
-    return lines
-        .map(line => `${' '.repeat(surroundingPadding / 2)}${line}`)
-        .join('\n')
-}
 const getTop = (topicIndex, numberOfTopics, screenHeight) => {
     const offset = Math.floor(screenHeight / (numberOfTopics / 3 + 0.5))
     const relativeIndex = Math.floor(topicIndex / 3)
@@ -65,10 +55,9 @@ export default function Overview({ screen, slides, onChange, showAll = true }) {
         }
         return memo
     }, [])
+    topics = topics.filter(t => !['Modules', 'About'].includes(t.title))
     if (!showAll) {
-        topics = topics.filter(
-            t => !['Intro', 'About', 'Outro'].includes(t.title)
-        )
+        topics = topics.filter(t => !['Intro', 'Outro'].includes(t.title))
     }
     return (
         <>

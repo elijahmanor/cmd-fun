@@ -3,12 +3,16 @@ import MDX from '@mdx-js/runtime'
 import { MDXProvider } from '@mdx-js/react'
 import CopyButton from './CopyButton'
 import RunButton from './RunButton'
+import Code from './Code'
+import HeartRate from './HeartRate'
 import Link from './Link'
 import Highlight from './Highlight'
 import Appear from './Appear'
 import TabCompletion from './TabCompletion'
 import blessed from 'neo-blessed'
 import figlet from 'figlet'
+import { centerFiglet } from './utils'
+import chalk from 'chalk'
 
 const H1_FONTS = [
     'Big',
@@ -28,37 +32,30 @@ const H1_FONTS = [
     'Slant',
 ]
 const H2_FONTS = ['Calvin S', 'Cybermedium', 'Stick Letters', 'Small']
-const centerFiglet = (text, width) => {
-    const lines = text.split('\n')
-    const longestLine = lines.reduce((memo, line) => {
-        memo = line.length > memo ? line.length : memo
-        return memo
-    }, 0)
-    const surroundingPadding = width - longestLine
-    return lines
-        .map(line => `${' '.repeat(surroundingPadding / 2)}${line}`)
-        .join('\n')
-}
 const components = {
     h1: ({ children, ...props }) => (
         <text top={1} bold {...props}>
-            {centerFiglet(
-                figlet.textSync(children, {
-                    font: H1_FONTS[0],
-                    horizontalLayout: 'default',
-                    verticalLayout: 'default',
-                }),
-                global.screen.width - 2
+            {chalk.yellowBright(
+                centerFiglet(
+                    figlet.textSync(children, {
+                        font: H1_FONTS[0],
+                        horizontalLayout: 'default',
+                        verticalLayout: 'default',
+                    }),
+                    global.screen.width - 8
+                )
             )}
         </text>
     ),
     h2: ({ children, ...props }) => (
         <text top={1} bold {...props}>
-            {figlet.textSync(children, {
-                font: H2_FONTS[0],
-                horizontalLayout: 'default',
-                verticalLayout: 'default',
-            })}
+            {chalk.bold(
+                figlet.textSync(children, {
+                    font: H2_FONTS[0],
+                    horizontalLayout: 'default',
+                    verticalLayout: 'default',
+                })
+            )}
         </text>
     ),
     p: ({ children }) => <text>{children}</text>,
@@ -70,6 +67,8 @@ const components = {
     Link: ({ ...props }) => <Link {...props} />,
     Appear: ({ ...props }) => <Appear {...props} />,
     TabCompletion: ({ ...props }) => <TabCompletion {...props} />,
+    Code: ({ ...props }) => <Code {...props} />,
+    HeartRate: ({ ...props }) => <HeartRate {...props} />,
 }
 
 blessed.classes.forEach(key => {

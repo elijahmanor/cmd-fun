@@ -1,0 +1,144 @@
+# Create Custom Programs
+
+---
+
+## Function in an Alias
+
+The previous alias couldn't accept an argument, this one can because it defines a function.
+
+```
+alias toast='f() { notify -t "Toast" -m ${1:-"Command Complete"} -s Glass };f'
+```
+
+Example Usage:
+
+```
+npm install && toast                # Message that says "Command Complete" (default)
+npm test && toast "Tests complete"  # Message that says "Tests Complete"
+```
+
+---
+
+## Standalone Function
+
+Instead of embedding a function in a one-liner alias, you can just define a top-level function instead.
+
+```
+function npm-link() {
+  echo "Starting to link node_modules for ~/github/$1"
+  rm -rf ~/github/$1/node_modules
+  npm link ~/github/$1
+  echo "Finished linking $1"
+}
+```
+
+Example Usage:
+
+```
+npm-link web-awesome-slice
+```
+
+---
+
+## Create a custom Bash Script
+
+```
+#!/usr/bin/env bash
+
+echo "Building..."
+rm -rf public/$npm_package_version
+pug --obj data.json src/index.pug --out public/$npm_package_version/
+node-sass src/index.scss | postcss -c .postcssrc.json | cssmin > public/$npm_package_version/index.min.css
+mustache data.json src/index.mustache.js | uglifyjs > public/$npm_package_version/index.min.js
+echo "Finished building."
+```
+
+---
+
+## Create a custom Node Program
+
+-   commander - managed CLI options
+-   chalk - add color to the app
+-   inquirer - ask interactive questions
+-   shells - unix shell commands for Node.js
+
+---
+
+## Create a Slack bot to Stalk your Friends
+
+-   [Slack Stalker](https://gist.github.com/elijahmanor/935559868675c7c22b7c0da6721a57cd)
+
+Tools used...
+
+-   `@slack/client` to communicate with Slack
+-   `chalk` to make logging pretty
+-   `say` to speak out loud
+-   `chat-joke` to generate a joke
+
+---
+
+## Heart Rate from Today
+
+<HeartRate top={5} left={4} src="heartrate-2019-11-18.csv" />
+
+---
+
+## Heart Rate from Today
+
+Tools used...
+
+-   `fs` to read the csv file
+-   `csv-parse` to parse the csv file
+-   `date-fns` to format the time
+-   `babar` to create an ascii chart
+
+---
+
+## Create a custom React Program
+
+If you want a full or partial screen interface
+
+-   https://github.com/chjj/blessed
+-   https://github.com/Yomguithereal/react-blessed
+
+If you'd like a standard CLI experience
+
+-   https://github.com/vadimdemedes/ink
+-   https://github.com/vadimdemedes/create-ink-app
+
+---
+
+## Twenty-Fourty-Eight - Command Line Edition
+
+```
+cd ~/github/2048-cmd
+npm start
+```
+
+Tools used...
+
+-   `blessed` for a terminal interface
+-   `react-blessed` to provide React components for blessed
+-   `chalk` to add color to the interface
+
+---
+
+## Twenty-Fourty-Eight - Web Edition
+
+```
+cd ~/github/2048-web
+npm start
+```
+
+Tools used...
+
+-   `react` library to build user interfaces
+-   `react-dom` to render in the browser's DOM
+-   `animate-css-grid` to add animations
+-   `react-swipeable` to add gesture support
+
+---
+
+## Find an available name on npm
+
+http://npm.im/npm-name-cli

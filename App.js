@@ -17,7 +17,28 @@ const render = createBlessedRenderer(blessed)
 import figlet from 'figlet'
 import Help from './Help.js'
 import About from './About.js'
+import { centerFiglet, heartRate } from './utils'
+const chalk = (global.chalk = require('chalk'))
 const fs = require('fs')
+
+const getConfig = () => {
+    let config
+    try {
+        config = fs.readFileSync('.cmd-fun.json') || '{}'
+        config = JSON.parse(config)
+    } catch (err) {
+        config = {}
+    }
+    return config
+}
+
+const setConfig = values => {
+    const config = { ...getConfig(), ...values }
+    fs.writeFileSync('.cmd-fun.json', JSON.stringify(config, null, 2))
+}
+
+const config = getConfig()
+
 const ansimd = require('ansimd')
 const markdown = fs.readFileSync('./Readme.md')
 const H1_FONTS = [
@@ -62,19 +83,13 @@ const dialogMap = {
 class App extends Component {
     constructor(props) {
         super(props)
-        this.state = { index: 0, dialog: null }
+
+        this.state = { index: config.currentSlide || 0, dialog: null }
         this.updateIndex = this.updateIndex.bind(this)
         this.toggleShowOverview = this.toggleShowOverview.bind(this)
         this.toggleShowHelp = this.toggleShowHelp.bind(this)
         this.toggleShowAbout = this.toggleShowAbout.bind(this)
         this.handleIndexChange = this.handleIndexChange.bind(this)
-    }
-
-    componentDidMount() {
-        screen.key(['right', 'left'], this.updateIndex)
-        screen.key(['C-o'], this.toggleShowOverview)
-        screen.key(['C-a'], this.toggleShowAbout)
-        screen.key(['?'], this.toggleShowHelp)
 
         CONTENT.splice(1, 0, {
             title: 'About',
@@ -96,6 +111,13 @@ class App extends Component {
         })
     }
 
+    componentDidMount() {
+        screen.key(['right', 'left'], this.updateIndex)
+        screen.key(['C-o'], this.toggleShowOverview)
+        screen.key(['C-a'], this.toggleShowAbout)
+        screen.key(['?'], this.toggleShowHelp)
+    }
+
     updateIndex(ch, key) {
         const { index } = this.state
         let newIndex = 0
@@ -104,7 +126,9 @@ class App extends Component {
         } else if (key.name === 'left') {
             newIndex = index === 0 ? 0 : index - 1
         }
-        this.setState({ index: newIndex })
+        this.setState({ index: newIndex }, () => {
+            setConfig({ currentSlide: this.state.index })
+        })
     }
 
     toggleShowOverview() {
@@ -120,7 +144,9 @@ class App extends Component {
     }
 
     handleIndexChange(index) {
-        this.setState({ dialog: null, index })
+        this.setState({ dialog: null, index }, () => {
+            setConfig({ currentSlide: this.state.index })
+        })
     }
 
     render() {
@@ -130,9 +156,9 @@ class App extends Component {
         return (
             <>
                 <box
-                    label={
+                    label={chalk.yellowBright(
                         dialog ? dialogMap[dialog].title : currentSlide.title
-                    }
+                    )}
                     border={{ type: 'line' }}
                     style={{ border: { fg: 'blue' } }}
                     width="100%"
@@ -153,20 +179,21 @@ class App extends Component {
                 {!dialog && (
                     <>
                         <text top="100%-2" left={2}>
-                            {currentSlide.type}
+                            {`${chalk.blueBright.bold(currentSlide.type)}`}
                         </text>
                         {currentSlide.showTwitter ? (
                             <text top="100%-2" left={`50%-6`}>
-                                @elijahmanor
+                                {`${chalk.greenBright.bold('@elijahmanor')}`}
                             </text>
                         ) : null}
                         <text
                             top="100%-2"
                             left="100%-10"
                             valign="bottom"
-                        >{`${pad(index + 1, 2)} of ${pad(
-                            CONTENT.length,
-                            2
+                        >{`${chalk.blueBright.bold(
+                            pad(index + 1, 2)
+                        )} ${chalk.grey('of')} ${chalk.blueBright.bold(
+                            pad(CONTENT.length, 2)
                         )}`}</text>
                     </>
                 )}
@@ -210,19 +237,6 @@ const CONTENT = [
 // var escapes = require('markdown-escapes')
 // const escapeStringRegexp = require('escape-string-regexp')
 // var escape = require('markdown-escape')
-const centerFiglet = (text, width) => {
-    const lines = text.split('\n')
-    const longestLine = lines.reduce((memo, line) => {
-        memo = line.length > memo ? line.length : memo
-        return memo
-    }, 0)
-    const surroundingPadding = width - longestLine
-    return surroundingPadding / 2 > 0
-        ? lines
-              .map(line => `${' '.repeat(surroundingPadding / 2)}${line}`)
-              .join('\n')
-        : text
-}
 const escape = text => text.replace(/([\\`*_{}\[\]()#+\-.!])/g, '\\$1')
 const h1 = text =>
     // escape(

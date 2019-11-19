@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import figlet from 'figlet'
+import { centerFiglet } from './utils'
 
 // const FONTS = figlet.fontsSync()
 const FONTS = [
@@ -25,18 +26,6 @@ const FONTS = [
 ]
 const H2_FONTS = ['Calvin S', 'Cybermedium', 'Stick Letters', 'Small']
 let timerId
-
-const centerFiglet = (text, width) => {
-    const lines = text.split('\n')
-    const longestLine = lines.reduce((memo, line) => {
-        memo = line.length > memo ? line.length : memo
-        return memo
-    }, 0)
-    const surroundingPadding = width - longestLine
-    return lines
-        .map(line => `${' '.repeat(surroundingPadding / 2)}${line}`)
-        .join('\n')
-}
 
 export default function Conclusion({ screen }) {
     const [fontIndex, setFontIndex] = useState(0)

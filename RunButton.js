@@ -1,6 +1,8 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import shell from 'shelljs'
 
+const { exec, execSync, spawn } = require('child_process')
+
 const stylesheet = {
     bordered: {
         border: {

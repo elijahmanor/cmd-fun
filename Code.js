@@ -1,25 +1,31 @@
-import React, { Fragment, useState, useEffect } from "react";
-import cardinal from "cardinal";
-import CopyButton from "./CopyButton";
-import RunButton from "./RunButton";
+import React, { Fragment, useState, useEffect } from 'react'
+import cardinal from 'cardinal'
+import CopyButton from './CopyButton'
+import RunButton from './RunButton'
 
-export default function Highlight( { code = "", top, left, height = 3, width = "100%-6" } ) {
-    const [ isEditing, setIsEditing ] = useState( false );
-    const [ text, setText ] = useState( code );
-    let highlightedCode = text;
+export default function Highlight({
+    code = '',
+    top,
+    left,
+    height = 3,
+    width = '100%-6',
+}) {
+    const [isEditing, setIsEditing] = useState(false)
+    const [text, setText] = useState(code)
+    let highlightedCode = text
     try {
-        highlightedCode = cardinal.highlight( text );
-    } catch(e) {}
+        highlightedCode = cardinal.highlight(text)
+    } catch (e) {}
     const handleSubmit = input => {
-        setText( input );
-        setIsEditing( false );
-    };
+        setText(input)
+        setIsEditing(false)
+    }
     const handleCancel = () => {
-        setIsEditing( false );
-    };
+        setIsEditing(false)
+    }
     const handleEdit = () => {
-        setIsEditing( !isEditing );
-    };
+        setIsEditing(!isEditing)
+    }
     return (
         <Fragment>
             <form
@@ -28,12 +34,12 @@ export default function Highlight( { code = "", top, left, height = 3, width = "
                 focused
                 onSubmit={handleSubmit}
                 onReset={handleCancel}
-                left={0}
-                top={0}
-                width="100%-6"
-                height={1}
+                left={left}
+                top={top}
+                width={width}
+                height={`100%-${top + 6}`}
             >
-                { isEditing ? 
+                {isEditing ? (
                     <textbox
                         onSubmit={handleSubmit}
                         left={0}
@@ -46,38 +52,35 @@ export default function Highlight( { code = "", top, left, height = 3, width = "
                             bg: 'white',
                             fg: 'black',
                             focus: {
-                                bg: 'blue'
+                                bg: 'blue',
                             },
                             hover: {
-                                bg: 'blue'
-                            }
+                                bg: 'blue',
+                            },
                         }}
                         value={text}
-                    /> : 
-                    <box
-                        height={1}
-                        width="100%-6"
-                        top={0}
-                        left={left}>
-                        { highlightedCode }
-                    </box> }
+                    />
+                ) : (
+                    <box height={1} width="100%-6" top={0} left={left}>
+                        {highlightedCode}
+                    </box>
+                )}
+                <button
+                    mouse
+                    border={{ type: 'line' }}
+                    height={height}
+                    width={12}
+                    top={2}
+                    left={0}
+                    onClick={handleEdit}
+                >
+                    {isEditing ? 'Cancel' : 'Edit'}
+                </button>
+
+                <CopyButton top={2} left={12} textToCopy={text} />
+
+                <RunButton top={2} left={24} textToRun={text} />
             </form>
-
-            <button
-                mouse
-                border={{type: "line"}}
-                height={height}
-                width={12}
-                top={2}
-                left={0}
-                onClick={ handleEdit }>
-                { isEditing ? "Cancel" : "Edit" }
-            </button>
-
-            <CopyButton top={2} left={12} textToCopy={ text } />
-
-            <RunButton top={2} left={24} textToRun={ text } />
         </Fragment>
-    );
+    )
 }
-

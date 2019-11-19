@@ -1,52 +1,120 @@
 # Npm Tips and Tricks
 
+<!--
+
+TODO: Other ideas for this module
+
+## List available npm scripts - Part Two
+
+```
+npm i npm-quick-run -g
+https://github.com/bahmutov/npm-quick-run
+```
+
+## List available npm scripts - Tab Completion
+
+```
+npm completion >> ~/.zshrc
+```
+
+## See what Node modules are npm linked
+
+You could run... `ls -al node_modules` and look for symlinks
+
+However, there is a nice tool called `link-status` that specializes in this
+
+```
+link-status
+```
+
+Make an alias for links that adds the parameters
+
+```
+alias links="link-status -s -p"
+links
+```
+
+-->
+
 ---
 
-## List available npm scripts: Part One
+## List available npm scripts - npm run
 
-<text top={5}>npm run</text>
-
----
-
-## List available npm scripts: Part Two
-
-<text top={5}>npm i npm-quick-run -g</text>
-<text top={7}>https://github.com/bahmutov/npm-quick-run</text>
-
----
-
-## List available npm scripts: Part Three
-
-<text top={5}>npm i lana-cli -g</text>
-<text top={7}>https://github.com/paprikka/lana-cli</text>
+<Appear top={5}>
+    <Highlight top={0} left={4} pwd="my-project" command="npm run" />
+    <text top={2} left={4}>{`Lifecycle scripts included in my-project:
+  start
+    mdx-deck -p 1337 deck.mdx\n
+available via 'npm run-script':
+  build
+    mdx-deck build deck.mdx
+  help
+    mdx-deck
+  gh-pages
+    git subtree push --prefix dist origin gh-pages
+  deploy
+    npm run build && cd dist && npx now`}</text>
+</Appear>
 
 ---
 
 ## List top level dependencies
 
-<text top={5}>npm -g ls —depth-0</text>
-<text top={7}>npm i npmlist</text>
+<Highlight top={5} left={4} command="npm -g ls —depth-0" />
+<CopyButton top={7} left={4} textToCopy="npm -g ls —depth-0" />
 
 ---
 
-## Run a locally installed node modules
+## Run a locally installed node module
 
-<text top={5}>npx</text>
+<Appear top={5}>
+    <>
+        <text top={0} left={0}>{`Instead of trying one of the following...`}</text>
+        <Highlight top={2} left={4} command="./node_modules/.bin/eslint --init" />
+        <Highlight top={4} left={4} command="$(npm bin)/eslint --init" />
+    </>
+    <>
+        <text top={6} left={0}>{`You can use 'npx' and it'll execute a locally installed version`}</text>
+        <Highlight top={8} left={4} command="npx eslint --init" />
+    </>
+</Appear>
 
 ---
 
 ## Temporarily download & run a node module
 
-<text top={5}>npx</text>
-
----
-
-## See what Node modules are npm linked
-
-<text top={5}>link-status</text>
+<Appear top={5}>
+    <>
+        <text top={0} left={0}>{`If you don't have a node module already locally installed, npx will temporarily download it and run`}</text>
+        <Highlight top={2} left={4} command="npx create-react-app my-project" />
+    </>
+    <>
+        <text top={4} left={0}>Benefits of this are...</text>
+        <text top={6} left={4}>{`1. Keep the global namespace clean
+2. Always run the latest of the module
+            `}</text>
+    </>
+</Appear>
 
 ---
 
 ## Visually update local dependencies
 
-<text top={5}>npx npm-check -u</text>
+<Appear top={5}>
+    <Highlight top={0} left={4} command="npx npm-check -u" />
+    <text top={2} left={0}>{`${global.chalk.green('?')} Choose which packages to update. (Press <space> to select)\n
+ ${global.chalk.greenBright.underline('Patch Update')} ${global.chalk.green('Backwards-compatible bug fixes.')}
+${'❯'}◯ ${'figlet'}  1.2.3  ❯  1.2.4  ${'https://github.com/patorjk/figlet.js#readme'}\n
+ ${global.chalk.yellowBright.underline('Minor Update')} ${global.chalk.yellow('New backwards-compatible features.')}
+ ◯ ${global.chalk.yellow('@babel/core')}                                7.5.5   ❯  7.7.2    ${global.chalk.blue('https://babeljs.io/')}
+ ◯ ${global.chalk.yellow('@babel/plugin-proposal-object-rest-spread')}  7.5.5   ❯  7.6.2    ${global.chalk.blue('https://github.com/babel/babel')}
+ ◯ ${global.chalk.yellow('@babel/polyfill')}                            7.6.0   ❯  7.7.0    ${global.chalk.blue('https://babeljs.io/')}
+ ◯ ${global.chalk.yellow('@babel/preset-env')}                          7.5.5   ❯  7.7.1    ${global.chalk.blue('https://babeljs.io/')}
+ ◯ ${global.chalk.yellow('@babel/preset-react')}                        7.0.0   ❯  7.7.0    ${global.chalk.blue('https://babeljs.io/')}
+ ◯ ${global.chalk.yellow('@babel/register')}                            7.5.5   ❯  7.7.0    ${global.chalk.blue('https://github.com/babel/babel')}
+ ◯ ${global.chalk.yellow('@mdx-js/runtime')}                            1.3.0   ❯  1.5.1    ${global.chalk.blue('https://mdxjs.com')}
+ ◯ ${global.chalk.yellow('react')}                                      16.9.0  ❯  16.12.0  ${global.chalk.blue('https://reactjs.org/')}
+ ◯ ${global.chalk.yellow('ws')}                                         7.1.2   ❯  7.2.0    ${global.chalk.blue('https://github.com/websockets/ws')}
+ ◯ ${global.chalk.yellow('eslint devDep')}                              6.2.1   ❯  6.6.0    ${global.chalk.blue('https://eslint.org')}\n
+ Space to select. Enter to start upgrading. Control-C to cancel.`}</text>
+</Appear>

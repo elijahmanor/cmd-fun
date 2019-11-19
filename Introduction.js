@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react'
-import blessed from 'neo-blessed'
+import React, { useState, useEffect } from 'react'
 import figlet from 'figlet'
+import { centerFiglet } from './utils'
+import chalk from 'chalk'
 
 const FONTS = [
     'ANSI Shadow',
@@ -28,18 +29,6 @@ const FONTS = [
 let timerId
 const fs = require('fs')
 
-const centerFiglet = (text, width) => {
-    const lines = text.split('\n')
-    const longestLine = lines.reduce((memo, line) => {
-        memo = line.length > memo ? line.length : memo
-        return memo
-    }, 0)
-    const surroundingPadding = width - longestLine
-    return lines
-        .map(line => `${' '.repeat(surroundingPadding / 2)}${line}`)
-        .join('\n')
-}
-
 export default function Introduction({ screen, onFontChange }) {
     const [fontIndex, setFontIndex] = useState(0)
     const [showFont, setShowFont] = useState(false)
@@ -58,49 +47,56 @@ export default function Introduction({ screen, onFontChange }) {
         screen.key(['C-f'], handleKey)
         return () => screen.unkey(['C-f'], handleKey)
     }, [fontIndex])
+
     const font = FONTS[fontIndex]
     return (
         <>
             <box
-                top={`5%`}
+                top={`0%`}
                 left="center"
                 width="100%-2"
                 align="center"
                 height={7}
             >
-                {centerFiglet(
-                    figlet.textSync('Have Fun & Be', {
-                        font,
-                        horizontalLayout: 'default',
-                        verticalLayout: 'default',
-                    }),
-                    screen.width
+                {chalk.blue(
+                    centerFiglet(
+                        figlet.textSync('Have Fun & Be', {
+                            font,
+                            horizontalLayout: 'default',
+                            verticalLayout: 'default',
+                        }),
+                        screen.width
+                    )
                 )}
             </box>
             <box
-                top={`35%`}
+                top={`30%`}
                 left="center"
                 align="center"
                 width="100%-2"
                 height={7}
             >
-                {centerFiglet(
-                    figlet.textSync('Productive in', {
-                        font,
-                        horizontalLayout: 'default',
-                        verticalLayout: 'default',
-                    }),
-                    screen.width
+                {chalk.blue(
+                    centerFiglet(
+                        figlet.textSync('Productive in', {
+                            font,
+                            horizontalLayout: 'default',
+                            verticalLayout: 'default',
+                        }),
+                        screen.width
+                    )
                 )}
             </box>
-            <box top={`65%`} left="center" width="100%-2" height={7}>
-                {centerFiglet(
-                    figlet.textSync('the Terminal', {
-                        font,
-                        horizontalLayout: 'default',
-                        verticalLayout: 'default',
-                    }),
-                    screen.width
+            <box top={`60%`} left="center" width="100%-2" height={7}>
+                {chalk.blue(
+                    centerFiglet(
+                        figlet.textSync('the Terminal', {
+                            font,
+                            horizontalLayout: 'default',
+                            verticalLayout: 'default',
+                        }),
+                        screen.width
+                    )
                 )}
             </box>
             {showFont && (

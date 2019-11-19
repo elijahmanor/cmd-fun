@@ -1,5 +1,13 @@
 # Shell Tips & Tricks
 
+<!--
+
+TODO: Other ideas for this module
+
+## Add npm version to oh-my-zsh theme
+
+-->
+
 ---
 
 ## Quickly switch to previous git branch
@@ -60,7 +68,7 @@
 
 ---
 
-## Use Unix brace expansion: Basics
+## Use Unix brace expansion - Basics
 
 <Appear top={5}>
     <Highlight top={0} left={4} command="echo {1..8}" />
@@ -73,7 +81,7 @@
 
 ---
 
-## Use Unix brace expansion: Practical
+## Use Unix brace expansion - Practical
 
 <Appear top={5}>
     <Highlight top={0} left={4} command="touch index.{html,css,js}" />
@@ -229,166 +237,348 @@
 
 ---
 
-## Bash History
+## Bash History - Static
 
-```
-history
-history | awk '{print $2}' | sort | uniq -c | sort -rn | head -5
-[up-arrow]
-Control-R - Start typing, Control-R for other matches
-```
+<Appear top={5}>
+    <Highlight top={0} left={4} command="history" />
+    <box top={2} left={4}>
+        {`    1  clear
+    2  node
+  ...  misc  ...
+  194  git commit -am "Adjusted package.json"
+  195  git push origin master`}
+    </box>
+    <Highlight
+        top={8}
+        left={4}
+        command="history | awk '{print $2}' | sort | uniq -c | sort -rn | head -5ory"
+    />
+    <box top={10} left={4}>
+        {`3386 git
+1828 npm
+ 461 z
+ 418 cd
+ 349 ls`}
+    </box>
+</Appear>
+
+---
+
+## Bash History - Interactive
+
+<Appear top={5}>
+    <text top={0} left={0}>{`${global.chalk.bold('Up-Arrow')}: Cycles through most recent history...`}</text>
+    <>
+        <Highlight top={2} left={4} command="<up-arrow>" />
+        <Highlight
+            top={3}
+            left={4}
+            command="echo 'Last command in history'"
+        
+        />
+    </>
+    <text top={5} left={0}>{`${global.chalk.bold('Control-R')}: Dynamically searches history as you type...`}</text>
+    <>
+        <Highlight top={7} left={4} command="<control-r>" />    
+        <Highlight top={8} left={4} command="echo $PATH" />
+        <text top={9} left={4}>
+            bck-i-search: echo_
+        </text>
+    </>
+</Appear>
 
 ---
 
 ## Oh-My-Zsh History
 
-```
-npm i[up-arrow]
-```
+<Appear top={5}>
+    <text top={0} left={0}>{`${global.chalk.bold('Up-Arrow')}: Cycles through most recent history (starts-with)...`}</text>
+    <>
+        <Highlight top={2} left={4} command="npm i<up-arrow>" />
+        <Highlight
+            top={3}
+            left={4}
+            command="npm i eslint-plugin-jsx-a11y -D"
+        
+        />
+    </>
+</Appear>
 
 ---
 
 ## Oh-My-Zsh Spelling Correction
 
-In ~.zshrc change `ENABLE_CORRECTION="true"`
-
-```
-$ ~ > mr secrets.txt
-zsh: correct 'mr' to 'rm' [nyae]?
-```
+<Appear top={5}>
+    <>
+        <text top={0} left={0}>{`In ~.zshrc change ENABLE_CORRECTION="true"`}</text>
+        <Highlight top={2} left={4} command="mr secrets.txt" />
+        <text top={3} left={4}>{`zsh: correct 'mr' to 'rm' [nyae]?`}</text>
+    </>
+    <>
+        <text top={5} left={0}>{`Legend`}</text>
+        <text top={7} left={4}>{`n: no, don't correct`}</text>
+        <text top={8} left={4}>{`y: yes, do correct`}</text>
+        <text top={9} left={4}>{`a: abort, new prompt`}</text>
+        <text top={10} left={4}>{`e: edit, update command`}</text>
+    </>
+    <>
+        <text top={12} left={0}>{`Update Prompt`}</text>
+        <text top={14} left={4}>{`export SPROMPT="Correct %R to %r? [Yes, No, Abort, Edit] "`}</text>
+    </>
+    <>
+        <text top={16} left={0}>{`Ignore Command`}</text>
+        <text top={18} left={4}>{`alias <command>="nocorrect <command>"`}</text>
+    </>
+</Appear>
 
 ---
 
 ## Bash Changing Dirs
 
-The way you might switch to another project...
-
-```
-$ ~/project-1 > cd ../project-2
-$ ~/project-2 >
-```
+<Appear top={5}>
+    <>
+        <text top={0} left={0}>{`The way you might switch to another project...`}</text>
+        <Highlight top={2} left={4} pwd="~/project-1" command="cd .." />
+        <Highlight top={3} left={4} pwd="~/projects" command="cd project-2" />
+    </>
+    <text top={5} left={0}>Or combine actions in one command...</text>
+    <>
+        <Highlight top={7} left={4} pwd="~/project-1" command="cd ../project-2" />
+        <Highlight top={8} left={4} pwd="~/project-2" />
+    </>
+</Appear>
 
 ---
 
 ## Oh-My-Zsh Changing Dirs
 
-With zsh `AUTO_CD` makes it so you don't have to use `cd`
-
-```
-$ ~/project-1 > ../project-2
-$ ~/project-2 >
-```
-
-With zsh use `cd` to replace 2nd argument with 1st occurence of 1st argument in current path
-
-```
-$ ~/project-1 > cd -1 -2
-$ ~/project-2 >
-```
+<Appear top={5}>
+    <>
+        <text top={0} left={0}>{`With zsh ${global.chalk.bold('AUTO_CD')} makes it so you don't have to use ${global.chalk.bold('cd')}`}</text>
+        <Highlight top={2} left={4} pwd="~/project-1" command="../project-2" />
+        <Highlight top={3} left={4} pwd="~/project-2" />
+    </>
+    <text top={5} left={0}>{`With zsh use ${global.chalk.bold('cd')} to replace 2nd argument with 1st occurence of 1st argument in current path`}</text>
+    <>
+        <Highlight top={7} left={4} pwd="~/project-1" command="cd -1 -2" />
+        <Highlight top={8} left={4} pwd="~/project-2" />
+    </>
+</Appear>
 
 ---
 
 ## Oh-My-Zsh Path Expansion
 
-```
-path expansion - cd /u/to/b
-```
+<text top={5} left={0}>With `zsh` path expansion, you don’t have to type whole directory paths anymore.</text>
+<text top={7} left={0}>You can type out part of each directory and `zsh` will try to figure it out.</text>
+
+<Appear top={9}>
+    <Highlight top={0} left={4} command="cd /u/l/b" />
+    <Highlight top={2} left={4} command="cd /user/local/bin" />
+</Appear>
 
 ---
 
 ## Switch themes in Oh-My-Zsh
 
-You can change your theme by updating `ZSH_THEME` in `~/.zshrc`, then sourcing the zshrc
+<Appear top={5}>
+    <>
+        <text top={0} left={0}>{`You can change your theme by updating ${global.chalk.bold('ZSH_THEME')} in ${global.chalk.bold('~/.zshrc')}, then sourcing the zshrc`}</text>
+        <text top={2} left={4}>{`ZSH_THEME="bureau"`}</text>
+        <text top={4} left={4}>{`[Theme Screenshots](https://github.com/robbyrussell/oh-my-zsh/wiki/Themes)`}</text>
+    </>
+    <text top={6} left={0}>{`If you like to live dangerously, you can set a random theme for each instance!`}</text>
+    <>
+        <text top={8} left={4}>{`ZSH_THEME="random"`}</text>
+        <text top={10} left={4}>{`ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" "avit" "bira" "bureau" "gnzh" "nanotech" "sorin" )`}</text>
+    </>
+</Appear>
 
-[Theme Screenshots](https://github.com/robbyrussell/oh-my-zsh/wiki/Themes)
+---
+
+## Oh-My-Zsh Plugins - git
+
+Oh-My-Zsh already comes preconfigured with the `git` enabled in `~/.zshrc`.
+
+This plugin provides `git` aliases and auto-completions.
 
 ```
-ZSH_THEME="bureau"
-```
-
-If you like to live dangerously, you can set a random theme for each instance!
-
-```
-ZSH_THEME="random"
-ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" "avit" "bira" "bureau" "gnzh" "nanotech" "sorin" )
+plugins=(git)
 ```
 
 ---
 
-## Switch plugins in Oh-My-Zsh
+## Oh-My-Zsh Plugins - Auto Suggestions
 
-zsh-history-substring-search
-zsh-syntax-highlighting
+The `zsh-autosuggestions` plugin suggests commands as you type based on history and completions.
 
 ```
-plugins=(git npm z node brew zsh-autosuggestions)
+git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 ```
+
+Once you've cloned `zsh-autosuggestions`, then you'll need to append it to the `plugins` section of `~/.zshrc`.
+
+```
+plugins=(git zsh-autosuggestions)
+```
+
+---
+
+## Oh-My-Zsh Plugins - zsh-syntax-highlighting
+
+The `zsh-syntax-highlighting` plugin enables highlighting of commands whilst they are typed at a zsh prompt into an interactive terminal.
+
+This helps in reviewing commands before running them, particularly in catching syntax errors.
+
+```
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+```
+
+Once you've cloned `zsh-syntax-highlighting`, then you'll need to append it to the `plugins` section of `~/.zshrc`.
+
+```
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+```
+
+---
+
+## Oh-My-Zsh Plugins - z
+
+<text top={5} left={0}>{`The 'z' plugin tracks your most used directories, based on 'frecency'. It'll take you to the most 'frecent' directory that matches ALL of the regexes given on the command line, in order.`}</text>
+
+<text top={8} left={0}>{`'z' is already included with 'Oh-My-Zsh', so you don't need to download it. However, you'll need to append it to the 'plugins' section of '~/.zshrc'.`}</text>
+
+<text top={11} left={4}>
+    {`plugins=(git zsh-autosuggestions zsh-syntax-highlighting z)`}
+</text>
+   
+<text top={13} left={0}>{`Here is a sample usage of 'z'`}</text>
+
+<text top={15} left={4}>{`${global.chalk.blue('z')} foo         ${global.chalk.grey('# cd to most frecent dir matching foo')}
+${global.chalk.blue('z')} foo bar     ${global.chalk.grey('# cd to most frecent dir matching foo, then bar')}
+${global.chalk.blue('z')} -r foo      ${global.chalk.grey('# cd to highest ranked dir matching foo')}
+${global.chalk.blue('z')} -t foo      ${global.chalk.grey('# cd to most recently accessed dir matching foo')}
+${global.chalk.blue('z')} -l foo      ${global.chalk.grey('# list all dirs matching foo (by frecency)')}`}</text>
+
+---
+
+
+## Oh-My-Zsh Plugins - Etc...
+
+Here is my current complete plugin list, but there are many others available
+
+```
+plugins=(git npm z node brew zsh-autosuggestions zsh-syntax-highlighting)
+```
+
+* [Official Plugins](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins)
+* [Open Source Plugins](https://github.com/unixorn/awesome-zsh-plugins)
 
 ---
 
 ## Get rid of that last login message
 
-<Highlight top={5} left={0} highlight={false} code="touch ~/.hushlogin" />
-<CopyButton top={7} left={0} textToCopy="touch ~/.hushlogin" />
+<Appear top={5}>
+    <>
+        <text top={0} left={0}>{`When you create a new session, do you wish you could get rid of this message?`}</text>
+        <box top={2} left={4}>Last login: Sun Nov 17 21:40:59 on ttys004</box>
+    </>
+    <>
+        <text top={4} left={0}>{`Thankfully, it's easy as...`}</text>
+        <Highlight
+            top={6}
+            left={4}
+            command="touch ~/.hushlogin"
+        />
+        <CopyButton top={8} left={0} textToCopy="touch ~/.hushlogin" />
+    </>
+</Appear>
 
 ---
 
-## String together comamnds
+## String Together Commands - Piping
 
-<text top={5}>test</text>
+<Code top={5} left={0} code="devpun" />
+<box top={6} left={40} width={30} height={4} border={{ type: 'none' }}>
+    <text top={0} left={4}>• devpun -t react</text>
+    <text top={1} left={4}>• cowsay -f vader</text>
+    <text top={2} left={4}>• lolcatjs</text>
+</box>
 
 ---
 
 ## Add aliases for long Terminal commands
 
+You can print out a list of all available aliases with the following command.
+
+```
+alias
+```
+
+Other than `git` (there is a whole section about that later), here are a few small examples of helpful aliases.
+
+```
+alias ...=../..
+alias l='ls -lah'
+alias ls='ls -F --color=always --group-directories-first'
+alias ll='ls -la'
+alias zshrc="vim ~/.zshrc"
+alias zshrcs="source ~/.zshrc"
+```
+
 ---
 
-## Quickly navigate to frequent folders
+## Quickly see the calendar
 
-`z`
+<Code top={5} left={0} code="cal -3" />
+<box top={6} left={40} width={20} height={4} border={{ type: 'none' }}>
+    <text top={0} left={4}>• cal -3</text>
+    <text top={1} left={4}>• cal -y</text>
+    <text top={2} left={4}>• cal 12 1976</text>
+</box>
 
 ---
 
 ## Provide feedback to long running cmds
 
-<text top={5}>visual and auditory</text>
+<Appear top={5}>
+    <>
+        <text top={0} left={0}>{`Sometimes we run really long node processes and it's easy to get distracted and forget to come back to them.`}</text>
+        <text top={2} left={4}>{`alias beep='echo -e "\a"'
+alias tada='play-sound ~/manorisms/tada.mp3'                   ${global.chalk.grey('# npm i play-sound-cli -g')}
+alias toast='notify -t "Toast" -m "Command Complete" -s Glass' ${global.chalk.grey('# npm i node-notifier-cli -g')}`}</text>
+    </>
+    <text top={6} left={0}>{`So, how would you use these aliases?`}</text>
+    <text top={8} left={4}>{`${global.chalk.green('npm')} install && ${global.chalk.green('beep')}
+${global.chalk.green('npm')} test && ${global.chalk.green('tada')}
+${global.chalk.green('npm')} run build && ${global.chalk.green('toast')}`}</text>
+    <text top={12} left={0}>{`But what about parameters? We'll talk about that in the 'CUSTOM' section.`}</text>
+</Appear>
 
 ---
 
-## View your local weather on the terminal
+## Kick up a quick web server - Python
 
-<Highlight top={5} left={0} highlight={false} code="curl wttr.in" />
-<CopyButton top={7} left={0} textToCopy="curl wttr.in" />
-<RunButton top={7} left={12} textToRun="curl wttr.in" />
-<text top={11}>https://github.com/chubin/wttr.in</text>
-
----
-
-## Add npm version to oh-my-zsh theme
-
----
-
-## Install helpful tools with homebrew
-
-<text top={5}>`homebrew` - the missing package manager for macOS</text>
-
----
-
-## Kick up a quick web server: Part One
-
-<Highlight
-    top={5}
-    left={0}
-    highlight={false}
-    code="python -m SimpleHTTPServer 8000"
-/>
-<CopyButton top={7} left={0} textToCopy="python -m SimpleHTTPServer 8000" />
-<RunButton top={7} left={12} textToRun="python -m SimpleHTTPServer 8000" />
+<Appear top={5}>
+    <>
+        <Highlight
+            top={0}
+            left={4}
+            command="python -m SimpleHTTPServer 8000"
+        />
+        <CopyButton top={2} left={4} textToCopy="python -m SimpleHTTPServer 8000" />
+    </>
+    <>
+        <text top={6} left={0}>{`This would be a great candidate for an alias!`}</text>
+        <text top={8} left={4}>{`${global.chalk.green('alias')} server=${global.chalk.yellow('"python -m SimpleHTTPServer 8080"')}`}</text>
+    </>
+</Appear>
 
 ---
 
-## Kick up a quick web server: Part Two
+## Kick up a quick web server - Node
 
-<Highlight top={5} left={0} highlight={false} code="npx serve" />
-<CopyButton top={7} left={0} textToCopy="npx serve" />
-<RunButton top={7} left={12} textToRun="npx serve" />
+<Highlight top={5} left={0} command="npm install serve -g" />
+<Highlight top={7} left={0} command="serve" />
+<CopyButton top={9} left={0} textToCopy="serve" />
+
