@@ -43,7 +43,6 @@ const NUMBER_OF_ITEMS = 10
 
 export default function Help({ screen, slides, onChange }) {
     const offset = (screen.height * 0.7) / 10
-    console.log({ offset })
     return (
         <>
             <box

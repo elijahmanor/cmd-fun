@@ -17,6 +17,7 @@ const render = createBlessedRenderer(blessed)
 import figlet from 'figlet'
 import Help from './Help.js'
 import About from './About.js'
+import Diagnostic from './Diagnostic.js'
 import { centerFiglet, heartRate } from './utils'
 const chalk = (global.chalk = require('chalk'))
 const fs = require('fs')
@@ -78,6 +79,10 @@ const dialogMap = {
         component: About,
         title: 'About',
     },
+    diagnostic: {
+        component: Diagnostic,
+        title: 'Diagnostic',
+    },
 }
 
 class App extends Component {
@@ -89,6 +94,7 @@ class App extends Component {
         this.toggleShowOverview = this.toggleShowOverview.bind(this)
         this.toggleShowHelp = this.toggleShowHelp.bind(this)
         this.toggleShowAbout = this.toggleShowAbout.bind(this)
+        this.toggleShowDiagnostic = this.toggleShowDiagnostic.bind(this)
         this.handleIndexChange = this.handleIndexChange.bind(this)
 
         CONTENT.splice(1, 0, {
@@ -115,6 +121,7 @@ class App extends Component {
         screen.key(['right', 'left'], this.updateIndex)
         screen.key(['C-o'], this.toggleShowOverview)
         screen.key(['C-a'], this.toggleShowAbout)
+        screen.key(['C-d'], this.toggleShowDiagnostic)
         screen.key(['?'], this.toggleShowHelp)
     }
 
@@ -141,6 +148,10 @@ class App extends Component {
 
     toggleShowAbout() {
         this.setState({ dialog: this.state.dialog ? null : 'about' })
+    }
+
+    toggleShowDiagnostic() {
+        this.setState({ dialog: this.state.dialog ? null : 'diagnostic' })
     }
 
     handleIndexChange(index) {

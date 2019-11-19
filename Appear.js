@@ -18,6 +18,5 @@ export default function Appear({ top = 0, children, order = 0 }) {
         return () => screen.unkey(['up', 'down'], handleKey)
     }, [index, setIndex])
     const kids = React.Children.toArray(children).slice(0, index + 1)
-    // console.log(index, kids.length)
     return <box top={top}>{kids}</box>
 }

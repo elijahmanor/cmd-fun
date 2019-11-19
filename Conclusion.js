@@ -47,7 +47,7 @@ export default function Conclusion({ screen }) {
     return (
         <>
             <box
-                top="30%"
+                top="20%"
                 left="center"
                 align="center"
                 width="100%-2"
@@ -78,8 +78,20 @@ export default function Conclusion({ screen }) {
                     screen.width
                 )}
             </box>
-            {showFont && (
-                <box top="85%" left="center" width="80%" height="5%">
+            <box
+                top="70%"
+                left="center"
+                align="center"
+                width="100%-2"
+                height={2}
+            >
+                {centerFiglet(
+                    'https://github.com/elijahmanor/cmd-fun',
+                    screen.width
+                )}
+            </box>
+            {false && showFont && (
+                <box top="75%" left="center" width="80%" height="5%">
                     {font}
                 </box>
             )}
