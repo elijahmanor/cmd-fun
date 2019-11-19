@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import figlet from 'figlet'
 import { centerFiglet } from './utils'
 import chalk from 'chalk'
+import Printer from '@darkobits/lolcatjs'
 
 const FONTS = [
     'ANSI Shadow',
@@ -29,9 +30,22 @@ const FONTS = [
 let timerId
 const fs = require('fs')
 
+const colorMap = [
+    chalk.blue,
+    chalk.red,
+    chalk.green,
+    chalk.yellow,
+    chalk.magenta,
+    chalk.cyan,
+    chalk.white,
+    chalk.gray,
+    Printer.fromString,
+]
+
 export default function Introduction({ screen, onFontChange }) {
     const [fontIndex, setFontIndex] = useState(0)
     const [showFont, setShowFont] = useState(false)
+    const [colorIndex, setColorIndex] = useState(0)
 
     useEffect(() => {
         function handleKey(ch, key) {
@@ -48,6 +62,14 @@ export default function Introduction({ screen, onFontChange }) {
         return () => screen.unkey(['C-f'], handleKey)
     }, [fontIndex])
 
+    useEffect(() => {
+        function handleKey(ch, key) {
+            setColorIndex(colorIndex + 1)
+        }
+        screen.key(['C-v'], handleKey)
+        return () => screen.unkey(['C-v'], handleKey)
+    }, [colorIndex])
+
     const font = FONTS[fontIndex]
     return (
         <>
@@ -58,7 +80,7 @@ export default function Introduction({ screen, onFontChange }) {
                 align="center"
                 height={7}
             >
-                {chalk.blue(
+                {colorMap[colorIndex % colorMap.length](
                     centerFiglet(
                         figlet.textSync('Have Fun & Be', {
                             font,
@@ -76,7 +98,7 @@ export default function Introduction({ screen, onFontChange }) {
                 width="100%-2"
                 height={7}
             >
-                {chalk.blue(
+                {colorMap[colorIndex % colorMap.length](
                     centerFiglet(
                         figlet.textSync('Productive in', {
                             font,
@@ -88,7 +110,7 @@ export default function Introduction({ screen, onFontChange }) {
                 )}
             </box>
             <box top={`60%`} left="center" width="100%-2" height={7}>
-                {chalk.blue(
+                {colorMap[colorIndex % colorMap.length](
                     centerFiglet(
                         figlet.textSync('the Terminal', {
                             font,
@@ -99,7 +121,7 @@ export default function Introduction({ screen, onFontChange }) {
                     )
                 )}
             </box>
-            {showFont && (
+            {false && showFont && (
                 <box top="85%" left="center" width="80%" height="5%">
                     {font}
                 </box>
