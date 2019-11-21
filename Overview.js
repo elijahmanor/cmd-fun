@@ -39,7 +39,7 @@ const H2_FONTS = [
 let timerId
 
 const getTop = (topicIndex, numberOfTopics, screenHeight) => {
-    const offset = Math.floor(screenHeight / (numberOfTopics / 3 + 0.5))
+    const offset = Math.floor(screenHeight / (numberOfTopics / 3 + 0.75))
     const relativeIndex = Math.floor(topicIndex / 3)
     return relativeIndex * offset
 }
