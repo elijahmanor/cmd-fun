@@ -250,13 +250,13 @@ const CONTENT = [
 // var escape = require('markdown-escape')
 const escape = text => text.replace(/([\\`*_{}\[\]()#+\-.!])/g, '\\$1')
 const h1 = text =>
-    // escape(
-    figlet.textSync(text, {
-        font: H1_FONTS[0],
-        horizontalLayout: 'default',
-        verticalLayout: 'default',
-    })
-// )
+    chalk.yellow(
+        figlet.textSync(text, {
+            font: H1_FONTS[0],
+            horizontalLayout: 'default',
+            verticalLayout: 'default',
+        })
+    )
 const h2 = text =>
     figlet.textSync(text, {
         font: H2_FONTS[0],
@@ -274,13 +274,14 @@ mdxFiles
         files.forEach(file => {
             const [, slideNumber, title, subTitle] =
                 mdx.match(/^(\d+)-(\w+)-?(\w+)?\.mdx$/) || []
-            const isMarkdown = !file.split('\n').some(l => l.startsWith('<'))
+            const isMarkdown = !file.split('\n').some(l => /<[^!]/g.test(l))
             if (isMarkdown) {
                 file = file.trim()
+                file = file.replace(/(<!--[\s\S]*-->)/g, '') // remove comments
                 file = file.replace(/^(# (.+))$/gm, (match, p1, p2) => {
                     let heading = h1(p2)
                     const lines = heading.split('\n')
-                    heading = centerFiglet(heading, screen.width - 6)
+                    heading = centerFiglet(heading, screen.width)
                     const linesToPrepend = Math.floor(
                         (screen.height - lines.length) / 2 - 3
                     )

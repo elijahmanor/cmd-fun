@@ -13,7 +13,7 @@ export default function Help({ screen, slides, onChange }) {
     return (
         <>
             <box height={'85%'} width={'100%-10'} top={1} left={'0%'}>
-                {escape(h2(`${'-'.repeat(15)} DIAGNOSTIC ${'-'.repeat(15)}`))}
+                {escape(h2(`${'-'.repeat(11)} DIAGNOSTIC ${'-'.repeat(12)}`))}
             </box>
         </>
     )

@@ -46,7 +46,7 @@ TODO: Other ideas for this module
 
 ---
 
-## Quickly cd to a newly created directory
+## Quickly cd to a previous directory
 
 <Appear top={5}>
     <Highlight
@@ -64,6 +64,35 @@ TODO: Other ideas for this module
     />
     <Highlight top={6} left={4} pwd="~/myrepo" command="cd -" />
     <Highlight top={8} left={4} pwd="~/some/really/deeply/nested/place" />
+</Appear>
+
+---
+
+## cd to a newly created directory
+
+<Appear top={5}>
+    <>
+        <Highlight
+            top={0}
+            left={4}
+            pwd="~/projects"
+            command="npm init react-app some-really-long-app-name"
+        />
+        <Highlight top={2} left={4} pwd="~/projects" command="cd some-really-long-app-name" />
+        <Highlight
+            top={4}
+            left={4}
+            pwd="~/projects/some-really-long-app-name"
+            command=""
+        />
+    </>
+    <text top={6} left={0}>{`Instead of remembering the folder name or having to remember to cd afterwards...`}</text>
+    <>
+        <Highlight top={8} left={4} pwd="~/projects" command="npm init react-app some-really-long-app-name && cd $_" />
+        <Highlight top={10} left={4} pwd="~/projects/some-really-long-app-name" />
+    </>
+    <text top={12} left={0}>{`NOTE: $_ represents the previous command's last argument or the previous command if there were no arguments.`}</text>
+    
 </Appear>
 
 ---
@@ -396,7 +425,7 @@ TODO: Other ideas for this module
 
 ---
 
-## Oh-My-Zsh Plugins - git
+## Oh-My-Zsh Plugin - git
 
 Oh-My-Zsh already comes preconfigured with the `git` enabled in `~/.zshrc`.
 
@@ -408,7 +437,7 @@ plugins=(git)
 
 ---
 
-## Oh-My-Zsh Plugins - Auto Suggestions
+## Oh-My-Zsh Plugin - Auto Suggestions
 
 The `zsh-autosuggestions` plugin suggests commands as you type based on history and completions.
 
@@ -424,7 +453,7 @@ plugins=(git zsh-autosuggestions)
 
 ---
 
-## Oh-My-Zsh Plugins - zsh-syntax-highlighting
+## Oh-My-Zsh Plugin - Syntax Highlighting
 
 The `zsh-syntax-highlighting` plugin enables highlighting of commands whilst they are typed at a zsh prompt into an interactive terminal.
 
@@ -507,7 +536,7 @@ plugins=(git npm z node brew zsh-autosuggestions zsh-syntax-highlighting)
 
 ---
 
-## Add aliases for long Terminal commands
+## Add Aliases for Long Commands
 
 You can print out a list of all available aliases with the following command.
 
