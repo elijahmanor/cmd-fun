@@ -6,23 +6,21 @@ export const centerFiglet = (text, width) => {
     }, 0)
     const surroundingPadding = width - longestLine
     const leftPadding = Math.floor(surroundingPadding / 2)
-    return leftPadding
-        ? lines
-              .map(line => `${' '.repeat(surroundingPadding / 2)}${line}`)
-              .join('\n')
+    return leftPadding >= 0
+        ? lines.map(line => `${' '.repeat(leftPadding)}${line}`).join('\n')
         : text
 }
 
-const fs = require('fs')
-const parse = require('csv-parse/lib/sync')
 const babar = require('babar')
 const format = require('date-fns/format')
-export const heartRate = ({ src, width }) => {
-    const csv = fs.readFileSync(src, 'utf8')
-    let [, ...records] = parse(csv, {
-        columns: true,
-        skip_empty_lines: true,
-    })
+const asciichart = require('asciichart')
+export const heartRate = ({ records, startingIndex, width, height }) => {
+    records = records.slice(
+        Math.min(startingIndex, records.length - width),
+        startingIndex + width
+    )
+    records = records.map(r => parseFloat(r['Heart rate']))
+    return asciichart.plot(records, { height })
     records = records.map(record => {
         const heartRate = parseFloat(record['Heart rate'])
         let [hour, minute] = format(

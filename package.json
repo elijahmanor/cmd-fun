@@ -26,6 +26,7 @@
         "@darkobits/lolcatjs": "^3.1.3",
         "@mdx-js/runtime": "^1.3.0",
         "ansimd": "^0.2.1",
+        "asciichart": "^1.5.9",
         "babar": "^0.2.0",
         "blessed": "^0.1.81",
         "boxen": "^4.1.0",
