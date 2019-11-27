@@ -106,6 +106,8 @@ description: View the slide with "Slide Mode".
     -   https://github.com/tslide/tslide
 -   `How to` Interactively kill processes
     -   npx fkill-cli
+-   `How to` Navigate JSON on the Terminal
+    -   https://github.com/antonmedv/fx
 
 ### Create Your Own Tool
 
